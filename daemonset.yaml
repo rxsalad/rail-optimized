@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+ name: ip-preserving-host-device-cni
+ namespace: kube-system
+ labels:
+   app: ip-preserving-host-device-cni
+spec:
+ selector:
+   matchLabels:
+     app: ip-preserving-host-device-cni
+ updateStrategy:
+   type: RollingUpdate
+ template:
+   metadata:
+     labels:
+       app: ip-preserving-host-device-cni
+   spec:
+     priorityClassName: system-node-critical
+     terminationGracePeriodSeconds: 5
+     tolerations:
+       - operator: Exists
+     hostNetwork: true
+     containers:
+       - name: install
+         image: ghcr.io/digitalocean-packages/ip-preserving-host-device:v1.0.0
+         imagePullPolicy: IfNotPresent
+         securityContext:
+           privileged: true
+         volumeMounts:
+           - name: cni-bin
+             mountPath: /host/opt/cni/bin
+           - name: cni-state
+             mountPath: /var/lib/cni/ip-preserving-host-device
+     volumes:
+       - name: cni-bin
+         hostPath:
+           path: /opt/cni/bin
+           type: DirectoryOrCreate
+       - name: cni-state
+         hostPath:
+           path: /var/lib/cni/ip-preserving-host-device
+           type: DirectoryOrCreate

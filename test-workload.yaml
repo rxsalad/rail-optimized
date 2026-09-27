@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: 8-gpu-2-fabric-pod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: 8-gpu-2-fabric-pod
+  template:
+    metadata:
+      labels:
+        app: 8-gpu-2-fabric-pod
+      annotations:
+        k8s.v1.cni.cncf.io/networks: >-
+          roce-net-fabric0@pod-fabric0,
+          roce-net-fabric1@pod-fabric1
+    spec:
+      restartPolicy: Always
+      nodeSelector:
+        doks.digitalocean.com/gpu-brand: nvidia
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
+      volumes:
+        - name: temp-hf-cache
+          hostPath:
+            path: /root/.cache/huggingface
+            type: DirectoryOrCreate
+        - name: dshm 
+          emptyDir:
+            medium: Memory
+            sizeLimit: 128Gi
+      containers:
+        - name: server
+          image: pytorch/pytorch:2.13.0-cuda13.0-cudnn9-devel
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http-example
+          command: ["/bin/bash", "-lc"]
+          args:
+            - |
+             set -ex
+             apt update
+             apt install -y iproute2 iputils-ping infiniband-diags ibverbs-utils net-tools
+             exec sleep infinity 
+          securityContext:
+            capabilities:
+              add:
+              - IPC_LOCK
+          volumeMounts:
+            - name: temp-hf-cache
+              mountPath: /root/.cache/huggingface
+            - name: dshm
+              mountPath: /dev/shm
+          resources:
+            limits:
+              nvidia.com/gpu: "8"
+              rdma/fabric0: 100
+              rdma/fabric1: 100
+            requests:
+              nvidia.com/gpu: "8"
+              rdma/fabric0: 100
+              rdma/fabric1: 100

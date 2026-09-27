@@ -1,0 +1,177 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric0
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric0"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric1
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric1"
+   }'
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric2
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric2"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric3
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric3"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric4
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric4"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric5
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric5"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric6
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric6"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric7
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric7"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric8
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric8"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric9
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric9"
+   }'
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric10
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric10"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric11
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric11"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric12
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric12"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric13
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric13"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric14
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric14"
+   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: roce-net-fabric15
+spec:
+ config: '{
+     "cniVersion": "0.3.1",
+     "type": "ip-preserving-host-device",
+     "device": "fabric15"
+   }'
