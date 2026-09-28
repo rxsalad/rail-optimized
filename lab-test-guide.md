@@ -28,7 +28,7 @@
 
 ### 0.1 Cluster
 
-- **Cluster**: DigitalOcean Kubernetes (DOKS), version v1.36.0.
+- **Cluster**: DO Kubernetes (DOKS), version v1.36.0.
 - **Access method**: accessed through the jump host `nuc`, which already has `kubectl` configured with a kubeconfig; you can also SSH directly from `nuc` to each node's public IP (the two GPU nodes' private IPs cannot reach each other directly — you have to go through the public IP via `nuc`).
 
 ### 0.2 Nodes
@@ -62,7 +62,7 @@ OS: Debian 13 (trixie), Kernel 6.12.94, containerd 2.2.3.
   - an **IPv6 ULA address** assigned per infrastructure layer (e.g. `fd02::/64`, the same family as the `fd02:0:0:58::1`-style addresses used throughout this document).
 - The rail-optimized GPU fabric has **ECMP enabled by default** (equal-cost multi-path), providing multiple available paths for cross-rail/cross-SU communication.
 - On DOKS worker nodes, **each RDMA NIC is associated with its own independent VRF and routing table**, providing an isolated routing context for IP-based connectivity and path establishment (Section 2.4 and Section 3 will repeatedly demonstrate this "each NIC has its own independent routing table" phenomenon — this is where it comes from).
-- To let applications running in a Pod use these RDMA NICs, DigitalOcean provides a dedicated `ip-preserving-host-device` CNI plugin — it moves the NIC into the Pod's network namespace while preserving its IPv6 ULA address and associated routes. **The standard Host-Device plugin doesn't have this capability**; we'll deploy and verify this plugin next.
+- To let applications running in a Pod use these RDMA NICs, DO provides a dedicated `ip-preserving-host-device` CNI plugin — it moves the NIC into the Pod's network namespace while preserving its IPv6 ULA address and associated routes. **The standard Host-Device plugin doesn't have this capability**; we'll deploy and verify this plugin next.
 
 ### 1.2 How the `ip-preserving-host-device` Plugin Works
 

@@ -28,7 +28,7 @@
 
 ### 0.1 集群
 
-- **集群**：DigitalOcean Kubernetes (DOKS)，版本 v1.36.0。
+- **集群**：DO Kubernetes (DOKS)，版本 v1.36.0。
 - **访问方式**：通过跳板机 `nuc` 访问，`kubectl` 已配置好 kubeconfig；也可从 `nuc` 直接 SSH 到各节点公网 IP（两台 GPU 节点的内网 IP 互相之间不可直连，只能走公网 IP 经 `nuc` 跳转）。
 
 ### 0.2 节点
@@ -62,7 +62,7 @@ OS：Debian 13 (trixie)，Kernel 6.12.94，containerd 2.2.3。
   - 一个按基础设施划分的 **IPv6 ULA 地址**（如 `fd02::/64`，即本文档反复用到的 `fd02:0:0:58::1` 这类地址）。
 - Rail-optimized 的 GPU fabric **默认开启 ECMP**（等价多路径），为跨 rail/跨 SU 通信提供多条可用路径。
 - DOKS 工作节点上，**每张 RDMA NIC 各自关联一个独立的 VRF 和路由表**，为 IP 层面的连接建立（QP 建连）和转发提供隔离的路由上下文（后面第 2.4 节、第 3 节会反复验证到"每张 NIC 路由表各自独立"这个现象，根源就在这里）。
-- 要让 Pod 里的应用能用上这些 RDMA NIC，DigitalOcean 提供了专门的 `ip-preserving-host-device` CNI 插件——把网卡搬进 Pod netns 的同时，保留它的 IPv6 ULA 地址和关联路由。**标准的 Host-Device 插件不具备这个能力**，下面就来部署和验证这个插件。
+- 要让 Pod 里的应用能用上这些 RDMA NIC，DO提供了专门的 `ip-preserving-host-device` CNI 插件——把网卡搬进 Pod netns 的同时，保留它的 IPv6 ULA 地址和关联路由。**标准的 Host-Device 插件不具备这个能力**，下面就来部署和验证这个插件。
 
 ### 1.2 `ip-preserving-host-device` 插件原理
 
